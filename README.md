@@ -11,7 +11,7 @@ Usage:
 
 Example:
 ```
-./downloader.py https://archiveofourown.org/series/1372270 /home/ivy/fics/
+./downloader.py https://archiveofourown.org/series/1372270 /home/ivy/fics/ -f pdf
 ```
 
 Series URL is the link to the series on AO3, e.g. `https://archiveofourown.org/series/1372270`.
