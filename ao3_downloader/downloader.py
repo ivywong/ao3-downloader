@@ -90,20 +90,26 @@ def download_work(work_url, download_path, file_format, in_series=False):
     '''
     print("Downloading work metadata...")
     work_metadata = get_work_metadata(work_url, file_format)
-    print("Downloaded metadata.\nWork: {title}\nAuthors: {authors}\nPart: {part}".format(title=work_metadata.title, authors=work_metadata.authors, part=work_metadata.part))
+    print("Downloaded metadata.\nWork: {title}\nAuthors: {authors}\nPart: {part}".format(
+        title=work_metadata.title, authors=work_metadata.authors, part=work_metadata.part))
+
     try:
+        print("Downloading work at {}".format(filepath))
+
+        # build filename with optional series numbering
         prefix = "{:02d}-".format(work_metadata.part) if in_series else ""
         filename = "{}{}".format(prefix, work_metadata.filename)
         filepath = download_path / filename
 
-        print("Downloading work at {}".format(filepath))
+        # download work from AO3 and save to filesystem
         work = requests.get(work_metadata.download_url).content
         with filepath.open(mode='wb') as fid:
             fid.write(work)
+
+        print("Downloaded {} by {}.".format(work_metadata.title, work_metadata.authors))
     except IOError as e:
         print(e)
         sys.exit(1)
-    print("Downloaded {} by {}.".format(work_metadata.title, work_metadata.authors))
 
 def get_work_metadata(work_url, file_format):
     parser = utils.get_html_parser(work_url)
