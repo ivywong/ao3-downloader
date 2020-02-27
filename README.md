@@ -2,7 +2,7 @@
 
 Program to download AO3 series via command line (and eventually GUI).
 
-Requires Python 3.6+, `bs4`, `requests`.
+Requires Python 3.6+, `bs4`, `requests`,`pysimplegui`.
 
 Usage:
 ```
